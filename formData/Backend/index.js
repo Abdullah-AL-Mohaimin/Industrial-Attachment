@@ -1,11 +1,30 @@
 import "dotenv/config";
 import express from "express";
 import multer from "multer";
+//Convert URL to file path.
+import { fileURLToPath } from 'url';
+//Extract directory name from file path.
+import { dirname } from 'path';
+import path from 'path';
 
 
-const upload = multer({ dest: 'uploads/' });
 const app = express();
 const port = process.env.PORT;
+
+const filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(filename);
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null,path.join(__dirname + "/uploads"));
+  },
+  filename: function (req, file, cb) {
+    const fileExtension = file.originalname; 
+    cb(null, fileExtension);
+  }
+})
+
+const upload = multer({ storage: storage });
 
 
 
@@ -22,7 +41,7 @@ app.get("/", (req, res) => {
 });
 
 // form data received route
-app.post("/form", (req, res) => {
+app.post("/form",upload.single("photo"), (req, res) => {
   const { name, address } = req.body;
   console.log({ name, address });
   res.send("All OK");
