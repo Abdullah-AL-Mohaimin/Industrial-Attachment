@@ -1,10 +1,9 @@
 import "dotenv/config";
 import express from "express";
 import multer from "multer";
-//Convert URL to file path.
-import { fileURLToPath } from 'url';
-//Extract directory name from file path.
-import { dirname } from 'path';
+import { v4 as uuidv4 } from 'uuid';
+import { fileURLToPath } from 'url';//Convert URL to file path.
+import { dirname } from 'path';//Extract directory name from file path.
 import path from 'path';
 
 
@@ -19,7 +18,7 @@ const storage = multer.diskStorage({
     cb(null,path.join(__dirname + "/uploads"));
   },
   filename: function (req, file, cb) {
-    const fileExtension = file.originalname; 
+    const fileExtension = uuidv4() + file.originalname; 
     cb(null, fileExtension);
   }
 })
@@ -27,9 +26,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 
-
-
-// app.use(express.json());
 app.use(express.urlencoded());
 
 //Home route
