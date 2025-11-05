@@ -27,6 +27,7 @@ const upload = multer({ storage: storage });
 
 
 app.use(express.urlencoded());
+app.use(express.static("/uploads"));
 
 //Home route
 app.get("/", (req, res) => {
