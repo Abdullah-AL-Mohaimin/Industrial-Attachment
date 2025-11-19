@@ -9,13 +9,13 @@ const Navber = () => {
   const [isOpen,setIsOpen] =useState(false);
   return (
     <nav className="bg-black ">
-      <div className="h-[75px] text-white items-center flex justify-between">
+      <div className="h-[75px] text-white items-center flex justify-around">
         {/* menuber */}
         <button onClick={() => setIsOpen(!isOpen)} className="block sm:hidden sm:px-8 ">
             <FontAwesomeIcon icon={faBars} size="2x" />
         </button>
         {/* logo */}
-        <div className="sm:px-12">
+        <div>
           <a href="">
               <img src={logo} alt="" className="w-[126px] h-[34px]"/>
           </a>
@@ -27,11 +27,10 @@ const Navber = () => {
             <a href=""className="px-4">Discovery</a>
             <a href=""className="px-4">Contuct us</a>
         </div>
-        <div className="px-4 flex">
+        <div className=" flex">
           <a href=""><FontAwesomeIcon icon={faUser} size='2x' /></a>
           <a href=""><FontAwesomeIcon icon={faCartShopping} size='2x' /></a>
         </div>
-          
       </div>
         {/* menu buttons Mobail   */}
         <div className={`${isOpen ? "block":"hidden"} sm:hidden bg-gray-400 space-y-2 pb-3`}>
@@ -40,7 +39,6 @@ const Navber = () => {
           <a href=""className="px-4 block">Discovery</a>
           <a href=""className="px-4 block">Contuct us</a>
         </div>
-
     </nav>
   )
 }
